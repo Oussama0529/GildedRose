@@ -14,4 +14,14 @@ class GildedRoseTest {
     assertEquals("foo", element.name, "the name changed");
   }
 
+ @Test
+  @DisplayName("Test any product after one day quality degrade")
+  void afterOneDayQualityDegrade() {
+    Item element = new Item("ANY10", 5, 10);
+    GildedRose app = new GildedRose(new Item[] {element});
+    app.updateQuality();
+    assertEquals(9, element.quality, "quality should be 9");
+  }
+
+
 }
