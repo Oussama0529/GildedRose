@@ -14,6 +14,13 @@ class GildedRoseTest {
     assertEquals("foo", element.name, "the name changed");
   }
 
+  @Test
+  @DisplayName("Test tooString")
+  void test_toString() {
+    Item element = new Item("foo", 0, 0);    String tmp = element.toString();
+    assertEquals(element.name + ", " + element.sellIn + ", " + element.quality, tmp, "the outputis not correct  ");
+  }
+
  @Test
   @DisplayName("Test any product after one day quality degrade")
   void afterOneDayQualityDegrade() {
@@ -69,7 +76,7 @@ class GildedRoseTest {
   @Test
   @DisplayName(" The Quility of Sulfuras never change")
   void theQuilityOfSulfurasNeverChange() {
-    Item element = new Item("Sulfuras, Hand of Ragnaros", 10, 80);
+    Item element = new Item("Sulfuras, Hand of Ragnaros", -10, 80);
     GildedRose app = new GildedRose(new Item[] {element}); 
     app.updateQuality();
     assertEquals(element.quality,80,"The Quility of Sulfuras shouldn't change");
@@ -120,4 +127,49 @@ class GildedRoseTest {
     assertEquals(element.quality,0);
   }
 
-}
+  @Test
+  @DisplayName("Once the expiration date has passed for Aged Brie the quality increase by two")
+  void onceExpirationDateHasPassedForAgedBrieQualityIncreaseByTwo() {
+    Item element = new Item("Aged Brie", -5, 30);
+    GildedRose app = new GildedRose(new Item[] {element}); 
+    app.updateQuality();
+    assertEquals(element.quality, 32);
+    assertEquals(element.sellIn, -6);
+  }
+  @Test
+  @DisplayName("in any case quality of Aged Brie will never be more than 50  ")
+  void AgedBrieNeverBeMoreThanFifty() {
+    Item element = new Item("Aged Brie", -5, 50);
+    GildedRose app = new GildedRose(new Item[] {element}); 
+    app.updateQuality();
+    assertEquals(element.quality, 50);
+    assertEquals(element.sellIn, -6);
+  }
+
+  @Test
+  @DisplayName("in any case quality Sulfuras will never change, equals 80")
+  void qualitySulfurasHandOfRagnaros() {
+    Item element = new Item("Sulfuras, Hand of Ragnaros",7, 80);
+    GildedRose app = new GildedRose(new Item[] {element}); 
+    app.updateQuality();
+    assertEquals(element.quality, 80);
+  }
+  @Test
+  @DisplayName("Backstage passes to a TAFKAL80ETC concert increase by one ")
+  void qualityBackstagepassestoaTAFKAL80ETCconcertIncreaseByOne() {
+    Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 11, 40);
+    GildedRose app = new GildedRose(new Item[] {element}); 
+    app.updateQuality();
+    assertEquals(element.quality, 41);
+  }
+
+  @Test
+  @DisplayName("Backstage passes to a TAFKAL80ETC concert IFQualityUnder50")
+  void qualityBackstagepassestoaTAFKAL80ETCconcertIFQualityUnder0() {
+    Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49);
+    GildedRose app = new GildedRose(new Item[] {element}); 
+    app.updateQuality();
+    assertEquals(element.quality, 50);
+  }
+
+} 
