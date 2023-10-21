@@ -179,7 +179,7 @@ class GildedRoseTest {
     Item element = new Item("Conjured Mana Cake", 10, 20);
     GildedRose app = new GildedRose(new Item[] {element});
     app.updateQuality();
-    assertEquals(22, element.quality);
+    assertEquals(18, element.quality);
 
   }
 

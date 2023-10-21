@@ -31,7 +31,15 @@ class GildedRose {
             ajusteQuality(item, 1);
           }            
           break;
-          
+        case "Conjured Mana Cake":
+          if (item.sellIn>=0){
+            item.quality -= 2;
+          }   
+          else{
+            item.quality -= 4;
+          } 
+          item.sellIn--;
+          break;
         default:
           item.sellIn--;
           if (item.quality>0) {
