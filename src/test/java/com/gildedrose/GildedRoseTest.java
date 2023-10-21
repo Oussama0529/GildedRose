@@ -102,5 +102,22 @@ class GildedRoseTest {
   assertEquals(element.quality, 32);
   assertEquals(element.sellIn, 6);
   }
+  @Test
+  @DisplayName("Once the expiration date has passed, the quality degrades twice as fast. ")
+  void QualityDecreaseTwiceAfterExpiration() {
+    Item element = new Item("ANY5", 0, 40);
+    GildedRose app = new GildedRose(new Item[] {element}); 
+    app.updateQuality();
+    assertEquals(element.quality,38);
+  }
+
+  @Test
+  @DisplayName("Once the expiration date has passed for Backstage the quality equal zero ")
+  void qualityOfBackstageAfterLastDayEqualZero() {
+    Item element = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 30);
+    GildedRose app = new GildedRose(new Item[] {element}); 
+    app.updateQuality();
+    assertEquals(element.quality,0);
+  }
 
 }
