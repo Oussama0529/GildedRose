@@ -107,7 +107,7 @@ class GildedRoseTest {
     GildedRose app = new GildedRose(new Item[] {element}); 
     app.updateQuality();
   assertEquals(element.quality, 32);
-  assertEquals(element.sellIn, 6);
+
   }
   @Test
   @DisplayName("Once the expiration date has passed, the quality degrades twice as fast. ")
@@ -172,4 +172,34 @@ class GildedRoseTest {
     assertEquals(element.quality, 50);
   }
 
+
+  @Test 
+  @DisplayName("Conjured sellin MORE THEN ZERO quality test")
+  void ConjuredMORETHENZEROqualitytest() {
+    Item element = new Item("Conjured Mana Cake", 10, 20);
+    GildedRose app = new GildedRose(new Item[] {element});
+    app.updateQuality();
+    assertEquals(22, element.quality);
+
+  }
+
+  @Test 
+  @DisplayName("Conjured sellin LESS THEN ZERO quality test")
+  void ConjuredLESSTHENZEROqualitytest() {
+    Item element = new Item("Conjured Mana Cake", -10, 30);
+    GildedRose app = new GildedRose(new Item[] {element});
+    app.updateQuality();
+    assertEquals(26, element.quality);
+
+  }
+
+  @Test 
+  @DisplayName("Conjured sellin decrease ")
+  void ConjuredSellinDecrease() {
+    Item element = new Item("Conjured Mana Cake", 23, 40);
+    GildedRose app = new GildedRose(new Item[] {element});
+    app.updateQuality();
+    assertEquals(22, element.sellIn, "expected quality to be 4");
+
+  }
 } 

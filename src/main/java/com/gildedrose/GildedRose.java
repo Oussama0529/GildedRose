@@ -31,6 +31,7 @@ class GildedRose {
             ajusteQuality(item, 1);
           }            
           break;
+          
         default:
           item.sellIn--;
           if (item.quality>0) {
